@@ -1,2 +1,632 @@
-# st-indoor-zone
-ST Indoor Zone - Gaming Equipment Store in Chittagong, Bangladesh
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ST Indoor Zone | Your Ultimate Gaming Destination</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --teal: #00C9A7;
+      --gold: #C9A84C;
+      --dark: #050A0E;
+      --dark2: #0A1520;
+      --dark3: #0F1F30;
+      --text: #E0EAF0;
+      --muted: #7A9AAF;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dark);
+      color: var(--text);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 18px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* NOISE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(5,10,14,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,201,167,0.15);
+    }
+
+    .nav-logo {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--teal);
+      letter-spacing: 2px;
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--gold); }
+
+    nav ul {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    nav a:hover { color: var(--teal); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      padding: 8rem 2rem 4rem;
+      background: radial-gradient(ellipse at 50% 30%, rgba(0,201,167,0.08) 0%, transparent 70%),
+                  radial-gradient(ellipse at 80% 80%, rgba(201,168,76,0.05) 0%, transparent 60%);
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(0,201,167,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,201,167,0.05) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 800px; }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 0.4rem 1.2rem;
+      border: 1px solid var(--teal);
+      color: var(--teal);
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-family: 'Orbitron', monospace;
+      margin-bottom: 2rem;
+      animation: fadeDown 0.8s ease forwards;
+    }
+
+    h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s ease 0.2s both;
+    }
+
+    h1 .teal { color: var(--teal); }
+    h1 .gold { color: var(--gold); }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      animation: fadeUp 0.8s ease 0.4s both;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 0.8s ease 0.6s both;
+    }
+
+    .btn {
+      padding: 0.9rem 2.5rem;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background: var(--teal);
+      color: var(--dark);
+    }
+
+    .btn-primary:hover {
+      background: #00e8c0;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0,201,167,0.3);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+    }
+
+    .btn-outline:hover {
+      background: rgba(201,168,76,0.1);
+      transform: translateY(-2px);
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 6rem 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 900;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    /* ABOUT */
+    .about { background: var(--dark2); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-text p { color: var(--muted); margin-bottom: 1rem; }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .stat-card {
+      background: var(--dark3);
+      border: 1px solid rgba(0,201,167,0.15);
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: 'Orbitron', monospace;
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--teal);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--muted);
+      letter-spacing: 1px;
+    }
+
+    /* PRODUCTS */
+    .products { background: var(--dark); }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .product-card {
+      background: var(--dark2);
+      border: 1px solid rgba(0,201,167,0.1);
+      padding: 2rem;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--teal);
+      transform: scaleY(0);
+      transition: transform 0.3s;
+    }
+
+    .product-card:hover { border-color: rgba(0,201,167,0.3); transform: translateY(-4px); }
+    .product-card:hover::before { transform: scaleY(1); }
+
+    .product-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .product-card h3 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1rem;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+    }
+
+    .product-card p { color: var(--muted); font-size: 0.95rem; }
+
+    /* CONTACT */
+    .contact { background: var(--dark2); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-top: 3rem;
+    }
+
+    .contact-info h3 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1rem;
+      color: var(--teal);
+      margin-bottom: 2rem;
+      letter-spacing: 2px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-item-icon {
+      color: var(--gold);
+      font-size: 1.2rem;
+      margin-top: 0.2rem;
+    }
+
+    .contact-item-text { color: var(--muted); }
+    .contact-item-text strong { color: var(--text); display: block; }
+
+    /* PRIVACY */
+    .privacy { background: var(--dark); }
+
+    .privacy-box {
+      background: var(--dark2);
+      border: 1px solid rgba(0,201,167,0.15);
+      padding: 3rem;
+      margin-top: 2rem;
+    }
+
+    .privacy-box h3 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1rem;
+      color: var(--teal);
+      margin: 2rem 0 0.8rem;
+      letter-spacing: 1px;
+    }
+
+    .privacy-box h3:first-child { margin-top: 0; }
+    .privacy-box p { color: var(--muted); margin-bottom: 0.8rem; }
+    .privacy-box ul { color: var(--muted); padding-left: 1.5rem; }
+    .privacy-box li { margin-bottom: 0.4rem; }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid rgba(0,201,167,0.1);
+      padding: 3rem 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-logo {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--teal);
+      margin-bottom: 1rem;
+    }
+
+    .footer-logo span { color: var(--gold); }
+    footer p { color: var(--muted); font-size: 0.9rem; }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      nav ul { gap: 1.5rem; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .privacy-box { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="nav-logo">ST <span>Indoor Zone</span></a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#privacy">Privacy</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div class="hero-badge">Chittagong's Gaming Hub</div>
+      <h1>
+        Your Ultimate<br>
+        <span class="teal">Gaming</span> <span class="gold">Destination</span>
+      </h1>
+      <p>Premium gaming equipment, accessories, and gear — all under one roof in Chittagong, Bangladesh.</p>
+      <div class="hero-btns">
+        <a href="#products" class="btn btn-primary">Explore Products</a>
+        <a href="#contact" class="btn btn-outline">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text">
+          <div class="section-label">Who We Are</div>
+          <h2>Passion for <span style="color:var(--teal)">Gaming</span></h2>
+          <p>ST Indoor Zone is Chittagong's premier destination for gaming enthusiasts. We offer a curated selection of gaming equipment, accessories, and gear for every type of gamer.</p>
+          <p>From high-performance controllers to premium headsets — we have everything you need to elevate your gaming experience.</p>
+          <p>Our AI-powered customer assistant is available 24/7 on our Facebook page to help you find the perfect product.</p>
+        </div>
+        <div class="about-stats">
+          <div class="stat-card">
+            <span class="stat-number">500+</span>
+            <span class="stat-label">Products Available</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">24/7</span>
+            <span class="stat-label">AI Support</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Authentic Gear</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">Fast</span>
+            <span class="stat-label">Delivery in CTG</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="products" id="products">
+    <div class="container">
+      <div class="section-label">What We Offer</div>
+      <h2>Our <span style="color:var(--gold)">Products</span></h2>
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-icon">🎮</div>
+          <h3>Controllers</h3>
+          <p>Premium gaming controllers for PC, PlayStation, and Xbox. Wired and wireless options available.</p>
+        </div>
+        <div class="product-card">
+          <div class="product-icon">🎧</div>
+          <h3>Headsets</h3>
+          <p>Immersive gaming headsets with surround sound, noise cancellation, and crystal-clear mic quality.</p>
+        </div>
+        <div class="product-card">
+          <div class="product-icon">🖱️</div>
+          <h3>Mouse & Keyboard</h3>
+          <p>High-DPI gaming mice and mechanical keyboards for competitive advantage.</p>
+        </div>
+        <div class="product-card">
+          <div class="product-icon">🖥️</div>
+          <h3>Monitors</h3>
+          <p>High refresh rate gaming monitors for smooth, lag-free gameplay.</p>
+        </div>
+        <div class="product-card">
+          <div class="product-icon">💡</div>
+          <h3>RGB Accessories</h3>
+          <p>LED strips, RGB mousepads, and lighting accessories to set up your gaming zone.</p>
+        </div>
+        <div class="product-card">
+          <div class="product-icon">🕹️</div>
+          <h3>Gaming Chairs</h3>
+          <p>Ergonomic gaming chairs for long gaming sessions with maximum comfort.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="section-label">Get In Touch</div>
+      <h2>Contact <span style="color:var(--teal)">Us</span></h2>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3>ST Indoor Zone</h3>
+          <div class="contact-item">
+            <span class="contact-item-icon">📍</span>
+            <div class="contact-item-text">
+              <strong>Address</strong>
+              Chittagong, Bangladesh
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-item-icon">📞</span>
+            <div class="contact-item-text">
+              <strong>Phone</strong>
+              01635990895
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-item-icon">📧</span>
+            <div class="contact-item-text">
+              <strong>Email</strong>
+              shamimulhakim@gmail.com
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-item-icon">💬</span>
+            <div class="contact-item-text">
+              <strong>Facebook Messenger</strong>
+              Chat with our AI assistant 24/7 on our Facebook page
+            </div>
+          </div>
+        </div>
+        <div class="contact-info">
+          <h3>Business Hours</h3>
+          <div class="contact-item">
+            <span class="contact-item-icon">🕐</span>
+            <div class="contact-item-text">
+              <strong>Saturday - Thursday</strong>
+              10:00 AM – 9:00 PM
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-item-icon">🤖</span>
+            <div class="contact-item-text">
+              <strong>AI Chat Support</strong>
+              Available 24/7 on Facebook Messenger
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIVACY POLICY -->
+  <section class="privacy" id="privacy">
+    <div class="container">
+      <div class="section-label">Legal</div>
+      <h2>Privacy <span style="color:var(--teal)">Policy</span></h2>
+      <div class="privacy-box">
+        <p><strong>Last Updated:</strong> May 2026</p>
+
+        <h3>1. Introduction</h3>
+        <p>ST Indoor Zone ("we", "us", or "our") operates a Facebook Messenger AI chatbot to assist customers. This Privacy Policy explains how we collect, use, and protect your information when you interact with our Messenger bot.</p>
+
+        <h3>2. Information We Collect</h3>
+        <p>When you message us on Facebook Messenger, we may collect:</p>
+        <ul>
+          <li>Your Facebook name and profile ID</li>
+          <li>Messages and content you send to our bot</li>
+          <li>Timestamps of your conversations</li>
+          <li>Your preferred language</li>
+        </ul>
+
+        <h3>3. How We Use Your Information</h3>
+        <p>We use the collected information to:</p>
+        <ul>
+          <li>Respond to your questions and inquiries</li>
+          <li>Provide personalized customer support</li>
+          <li>Improve our products and services</li>
+          <li>Maintain conversation history for better assistance</li>
+        </ul>
+
+        <h3>4. Data Storage</h3>
+        <p>Your conversation data is stored securely in Google Sheets accessible only to ST Indoor Zone administrators. We do not sell, share, or transfer your data to any third parties.</p>
+
+        <h3>5. Third-Party Services</h3>
+        <p>Our chatbot uses the following third-party services:</p>
+        <ul>
+          <li><strong>Meta (Facebook)</strong> — Messenger platform for communication</li>
+          <li><strong>Google Sheets</strong> — Secure data storage</li>
+          <li><strong>Groq AI</strong> — AI language model for generating responses</li>
+          <li><strong>n8n</strong> — Workflow automation platform</li>
+        </ul>
+
+        <h3>6. Data Retention</h3>
+        <p>We retain conversation data for up to 90 days to provide better customer service. You may request deletion of your data at any time by contacting us.</p>
+
+        <h3>7. Your Rights</h3>
+        <p>You have the right to:</p>
+        <ul>
+          <li>Access your personal data</li>
+          <li>Request deletion of your data</li>
+          <li>Opt out of our messaging service at any time</li>
+        </ul>
+
+        <h3>8. Contact Us</h3>
+        <p>For any privacy-related questions or to request data deletion, contact us:</p>
+        <ul>
+          <li><strong>Email:</strong> shamimulhakim@gmail.com</li>
+          <li><strong>Phone:</strong> 01635990895</li>
+          <li><strong>Address:</strong> Chittagong, Bangladesh</li>
+        </ul>
+
+        <h3>9. Changes to This Policy</h3>
+        <p>We may update this Privacy Policy from time to time. We will notify users of any significant changes through our Facebook page.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">ST <span>Indoor Zone</span></div>
+    <p>Chittagong, Bangladesh &nbsp;|&nbsp; 01635990895 &nbsp;|&nbsp; shamimulhakim@gmail.com</p>
+    <p style="margin-top:0.5rem;">© 2026 ST Indoor Zone. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
