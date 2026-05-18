@@ -411,12 +411,12 @@
   <section class="hero">
     <div class="hero-grid"></div>
     <div class="hero-content">
-      <div class="hero-badge">Chittagong's Gaming Hub</div>
+      <div class="hero-badge">Gaming Zone</div>
       <h1>
         Your Ultimate<br>
         <span class="teal">Gaming</span> <span class="gold">Destination</span>
       </h1>
-      <p>Premium gaming equipment, accessories, and gear — all under one roof in Chittagong, Bangladesh.</p>
+      <p>Your one-stop destination for all indoor gaming products and accessories in Chittagong. Level Up Your Gaming Collection.</p>
       <div class="hero-btns">
         <a href="#products" class="btn btn-primary">Explore Products</a>
         <a href="#contact" class="btn btn-outline">Contact Us</a>
