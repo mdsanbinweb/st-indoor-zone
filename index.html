@@ -464,34 +464,14 @@
       <h2>Our <span style="color:var(--gold)">Products</span></h2>
       <div class="products-grid">
         <div class="product-card">
-          <div class="product-icon">🎮</div>
-          <h3>Controllers</h3>
-          <p>Premium gaming controllers for PC, PlayStation, and Xbox. Wired and wireless options available.</p>
-        </div>
-        <div class="product-card">
-          <div class="product-icon">🎧</div>
-          <h3>Headsets</h3>
-          <p>Immersive gaming headsets with surround sound, noise cancellation, and crystal-clear mic quality.</p>
-        </div>
-        <div class="product-card">
           <div class="product-icon">🖱️</div>
           <h3>Mouse & Keyboard</h3>
           <p>High-DPI gaming mice and mechanical keyboards for competitive advantage.</p>
         </div>
         <div class="product-card">
-          <div class="product-icon">🖥️</div>
-          <h3>Monitors</h3>
-          <p>High refresh rate gaming monitors for smooth, lag-free gameplay.</p>
-        </div>
-        <div class="product-card">
-          <div class="product-icon">💡</div>
-          <h3>RGB Accessories</h3>
-          <p>LED strips, RGB mousepads, and lighting accessories to set up your gaming zone.</p>
-        </div>
-        <div class="product-card">
-          <div class="product-icon">🕹️</div>
-          <h3>Gaming Chairs</h3>
-          <p>Ergonomic gaming chairs for long gaming sessions with maximum comfort.</p>
+          <div class="product-icon">🎲</div>
+          <h3>Board Games</h3>
+          <p>Fun and engaging board games for game nights with friends and family.</p>
         </div>
       </div>
     </div>
