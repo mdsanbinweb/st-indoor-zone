@@ -53,7 +53,6 @@
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(0,201,167,0.15);
     }
-
     .nav-logo {
       font-family: 'Orbitron', monospace;
       font-size: 1.3rem;
@@ -62,15 +61,12 @@
       letter-spacing: 2px;
       text-decoration: none;
     }
-
     .nav-logo span { color: var(--gold); }
-
     nav ul {
       display: flex;
       gap: 2.5rem;
       list-style: none;
     }
-
     nav a {
       color: var(--muted);
       text-decoration: none;
@@ -80,9 +76,68 @@
       text-transform: uppercase;
       transition: color 0.3s;
     }
-
     nav a:hover { color: var(--teal); }
 
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 26px;
+      height: 20px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 110;
+    }
+    .menu-toggle span {
+      display: block;
+      height: 2px;
+      width: 100%;
+      background: var(--teal);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    .menu-toggle.active span:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.active span:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle { display: flex; }
+
+      nav ul {
+        position: fixed;
+        top: 64px;
+        right: 0;
+        left: 0;
+        flex-direction: column;
+        gap: 0;
+        background: rgba(5,10,14,0.97);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(0,201,167,0.15);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+      nav ul.active {
+        max-height: 300px;
+      }
+      nav ul li {
+        width: 100%;
+        text-align: center;
+      }
+      nav ul li a {
+        display: block;
+        padding: 1.1rem 0;
+        border-bottom: 1px solid rgba(0,201,167,0.08);
+      }
+    }
     /* HERO */
     .hero {
       min-height: 100vh;
@@ -622,6 +677,22 @@
     <p>Chittagong, Bangladesh &nbsp;|&nbsp; 01635990895 &nbsp;|&nbsp; stindoorzone@gmail.com</p>
     <p style="margin-top:0.5rem;">© 2026 ST Indoor Zone. All rights reserved.</p>
   </footer>
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+  const navMenu = document.getElementById('navMenu');
 
+  menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('active');
+    navMenu.classList.toggle('active');
+  });
+
+  // close menu after tapping a link
+  navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      menuToggle.classList.remove('active');
+      navMenu.classList.remove('active');
+    });
+  });
+</script>
 </body>
 </html>
